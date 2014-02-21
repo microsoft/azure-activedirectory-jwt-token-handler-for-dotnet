@@ -54,6 +54,25 @@ namespace System.IdentityModel.Test
         }
 
         [TestMethod]
+        [TestProperty("TestCaseID", "72917EA5-7F0F-4B16-81A4-8E31AC965686")]
+        [Description("Defaults")]
+        public void Defaults()
+        {
+            TokenValidationParameters tokenValidationParameters = new TokenValidationParameters();
+            Assert.IsNull(tokenValidationParameters.AllowedAudience);
+            Assert.IsTrue(tokenValidationParameters.AudienceUriMode == Selectors.AudienceUriMode.BearerKeyOnly);
+            Assert.IsNull(tokenValidationParameters.AllowedAudience);
+            Assert.IsNull(tokenValidationParameters.AllowedAudiences);
+            Assert.IsFalse(tokenValidationParameters.SaveBootstrapContext);
+            Assert.IsNull(tokenValidationParameters.SigningToken);
+            Assert.IsNull(tokenValidationParameters.SigningTokens);
+            Assert.IsFalse(tokenValidationParameters.ValidateActor);
+            Assert.IsTrue(tokenValidationParameters.ValidateIssuer);
+            Assert.IsNull(tokenValidationParameters.ValidIssuer);
+            Assert.IsNull(tokenValidationParameters.ValidIssuers);
+        }
+
+        [TestMethod]
         [TestProperty( "TestCaseID", "5763D198-1A0A-474D-A5D3-A5BBC496EE7B" )]
         [Description( "ensures that set / gets are working" )]
         public void SetGet()
@@ -70,6 +89,7 @@ namespace System.IdentityModel.Test
                 SaveBootstrapContext = true,
                 SigningToken = KeyingMaterial.BinarayToken56BitKey,
                 SigningTokens = signingTokens,
+                ValidateActor = true,
                 ValidateIssuer = false,
                 ValidIssuer = "ValidIssuer",
                 ValidIssuers = validIssuers,
@@ -92,6 +112,8 @@ namespace System.IdentityModel.Test
             Assert.IsFalse( tokenValidationParameters.SigningTokens == null , string.Format( "Expecting: tokenValidationParameters.SigningTokens != null." ) );
 
             Assert.IsFalse( !object.ReferenceEquals( tokenValidationParameters.SigningTokens, signingTokens ) , "object.ReferenceEquals( tokenValidationParameters.SigningTokens, signingTokens ) is false" );
+
+            Assert.IsTrue( tokenValidationParameters.ValidateActor );
 
             Assert.IsFalse( tokenValidationParameters.ValidateIssuer , string.Format( "Expecting: tokenValidationParameters.ValidateIssuer to be false" ) );
 

@@ -33,8 +33,9 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public TokenValidationParameters()
         {
-            AudienceUriMode = AudienceUriMode.BearerKeyOnly;
+            this.AudienceUriMode = AudienceUriMode.BearerKeyOnly;
             this.SaveBootstrapContext = false;
+            this.ValidateActor = false;
             this.ValidateIssuer = true;
         }
 
@@ -89,6 +90,16 @@ namespace System.IdentityModel.Tokens
         /// Gets or sets a collection of <see cref="SecurityToken"/> to use when validating signatures.
         /// </summary>
         public IEnumerable<SecurityToken> SigningTokens
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the <see cref="JwtSecurityToken.Actor"/> should be validated.
+        /// </summary>
+        [DefaultValue(false)]
+        public bool ValidateActor
         {
             get;
             set;
