@@ -1559,6 +1559,11 @@ namespace System.IdentityModel.Tokens
                 throw new ArgumentNullException("validationParameters");
             }
 
+            if (!validationParameters.ValidateIssuer && string.IsNullOrWhiteSpace(jwt.Issuer))
+            {
+                return "no issuer";
+            }
+
             if (string.IsNullOrWhiteSpace(jwt.Issuer))
             {
                 throw new SecurityTokenValidationException(string.Format(CultureInfo.InvariantCulture, JwtErrors.Jwt10319));

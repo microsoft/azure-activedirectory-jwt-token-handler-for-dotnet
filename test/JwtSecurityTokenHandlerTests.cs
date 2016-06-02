@@ -26,7 +26,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Claims;
 using System.Text;
 using System.Xml;
-
 using ReservedClaims = System.IdentityModel.Tokens.JwtConstants.ReservedClaims;
 
 namespace System.IdentityModel.Test
@@ -1432,6 +1431,29 @@ namespace System.IdentityModel.Test
             jwtParams.ValidIssuer = null;
             handler.ValidateToken( jwt.RawData, jwtParams );
         }
+
+        [TestMethod]
+        [TestProperty("TestCaseID", "6356C21F-280C-4A9E-875C-F6543DF0A5E3")]
+        [Description("Test Validation without Issuer and Audience with kid")]
+        public void JwtSecurityTokenHandler_NoIssuerNoAudienceTest()
+        {
+
+            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+            handler.CertificateValidator = X509CertificateValidator.None;
+
+            JwtSecurityToken jwt = handler.CreateToken( lifetime: new Lifetime(DateTime.UtcNow, DateTime.UtcNow + TimeSpan.FromHours(2)),
+                                                        signingCredentials: KeyingMaterial.AsymmetricSigningCreds_2048_RsaSha2_Sha2);
+
+            TokenValidationParameters jwtParams = new TokenValidationParameters
+            { 
+                AudienceUriMode = AudienceUriMode.Never,
+                SigningToken = KeyingMaterial.X509Token_2048,
+                ValidateIssuer = false
+            };
+
+            handler.ValidateToken(jwt.RawData, jwtParams);
+        }
+
 
         [TestMethod]
         [TestProperty( "TestCaseID", "6356C21F-280C-4A9E-875C-F6543DF0A5E3" )]
