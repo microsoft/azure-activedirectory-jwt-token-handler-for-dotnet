@@ -1,14 +1,12 @@
-#Windows Azure Active Directory Jwt Token Handler for .Net
-===========
-
+# Windows Azure Active Directory Jwt Token Handler for .Net
 * Support for creating and validating Json Web Tokens.
 * Provides model for config free validation using TokenValidationParameters.
 
+# This repo is now deprecated
 
-##We will be working from a different repo going forward. We combined this work with additional Identity extensions to provide support for OpenIdConnect and WsFederation.
-##Please use the following repo for any issues.
+This repo has now been moved to [IdentityModel extensions for .Net](https://github.com/MSOpenTech/azure-activedirectory-identitymodel-extensions-for-dotnet/) which will combine this with additional Identity extensions to provide support for OpenIdConnect and WsFederation.
 
-https://github.com/MSOpenTech/azure-activedirectory-identitymodel-extensions-for-dotnet/
+Please use the above repo for any issues.
 
 ## License
 
